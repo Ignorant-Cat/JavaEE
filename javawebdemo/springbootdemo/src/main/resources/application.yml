@@ -1,0 +1,39 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql:///mybatis?useSSL=false&serverTimezone=GMT%2B8
+    username: root
+    password: 123456
+    type: com.alibaba.druid.pool.DruidDataSource #druid数据源
+
+
+#  mvc:
+#    static-path-pattern: /res/** # 静态资源的访问前缀，默认为/**
+    # http://localhost:8080/res/yuan.jpg 会影响欢迎页和图标
+
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+#默认表单提交是没有DELETE和PUT方式的 利用的是HiddenHttpMethodFilter
+  #表单提交一个隐藏参数：_method 对应 WebMvcAutoConfiguration 的 hiddenHttpMethodFilter方法
+  #PostMan可以直接发送DELETE和 PUT方式的请求
+
+
+  web:
+    resources:
+      static-locations: classpath:/here/ # 静态资源的存储位置，默认为"classpath:/META-INF/resources/",
+      # "classpath:/resources/", "classpath:/static/", "classpath:/public/"
+      #文件需要放到该位置才能访问到
+      add-mappings: true # false禁用访问所有静态资源 对应 WebMvcAutoConfiguration 的 addResourceHandlers方法
+
+# 欢迎页：index.html         对应WelcomePageHandlerMapping
+# 图标：favicon.ico需要重启会话
+
+
+
+# 配置mybatis
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true #驼峰映射
+

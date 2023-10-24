@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--依赖注入
+    1、构造方法注入：constructor-arg
+    2、set注入：property
+
+    基本数据类型用value
+    引用数据类型用ref
+    list,map,properties
+    -->
+    <bean id="userService" class="com.azy.ioc.service.impl.UserServiceImpl">
+        <property name="userDao" ref="userDao"/>
+    </bean>
+
+    <!--初始化函数和销毁函数-->
+    <bean id="userService2" class="com.azy.ioc.service.impl.UserServiceImpl2" init-method="init" destroy-method="destroy"/>
+
+    <!--1、有参构造-->
+    <bean id="userService3" class="com.azy.ioc.service.impl.UserServiceImpl3">
+        <constructor-arg name="name" value="张三"/>
+    </bean>
+    <!--2、静态工厂-->
+    <bean id="userService4" class="com.azy.ioc.service.impl.UserServiceBeanFactory" factory-method="getUserServiceImpl">
+        <constructor-arg value="张三"/>
+    </bean>
+    <!--3、实例工厂-->
+    <bean id="userServiceBeanFactory2" class="com.azy.ioc.service.impl.UserServiceBeanFactory2"/>
+    <bean id="userService5"  factory-bean="userServiceBeanFactory2" factory-method="getUserServiceImpl">
+        <constructor-arg value="张三"/>
+    </bean>
+    <!--4、FactoryBean-->
+    <bean id="userService6" class="com.azy.ioc.service.impl.UserServiceBeanFactory3"/>
+
+
+    <!--id为标识，name为别名，class指定对应的实现类
+    scope: singleton 单例模式，默认
+           prototype 非单例模式
+    lazy_init: true 懒加载，即在getBean的时候才创建bean，对beanFactory无效
+    -->
+    <bean id="userDao" name="abc" class="com.azy.ioc.dao.impl.UserDaoImpl" scope="singleton" lazy-init="false"/>
+
+
+    <!--自动装配（注入）
+    byName 根据set方法的名字
+    byType 根据类型自动装配
+    -->
+    <bean id="userService7" class="com.azy.ioc.service.impl.UserServiceImpl" autowire="byName"/>
+
+
+
+</beans>
