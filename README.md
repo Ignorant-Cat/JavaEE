@@ -4,7 +4,7 @@
 
 > 该部分案例来自于本人自学JavaWeb的练习项目，视频教程：[黑马程序员新版JavaWeb基础教程，Java web从入门到企业实战完整版](https://www.bilibili.com/video/BV1Qf4y1T7Hx/?p=1)
 
-### 品牌查询案例(对应BrandDemo工程)：
+### 品牌查询案例(对应brandemo工程)：
 
 >
 > MVC和三层架构，利用JSP+Servlet实现
